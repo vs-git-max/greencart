@@ -6,8 +6,15 @@ import { useAppContext } from "../context/AppContext";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
-  let { user, setUser, setUserLogin, navigate, setSearchQuery, searchQuery } =
-    useAppContext();
+  let {
+    user,
+    setUser,
+    setUserLogin,
+    navigate,
+    getCartCount,
+    setSearchQuery,
+    searchQuery,
+  } = useAppContext();
   console.log(user);
 
   const logout = async () => {
@@ -45,8 +52,8 @@ const Navbar = () => {
 
         <div className="relative cursor-pointer">
           <img src={data.assets.nav_cart_icon} alt="cart" className="size-4" />
-          <button className="absolute -top-2 -right-3 text-xs text-white bg-indigo-500 w-[18px] h-[18px] rounded-full">
-            10
+          <button className="absolute -top-2 -right-3 text-xs text-white bg-primary w-[18px] h-[18px] rounded-full">
+            {getCartCount()}
           </button>
         </div>
 
@@ -61,20 +68,28 @@ const Navbar = () => {
         </button>
       </div>
 
-      <button
-        onClick={() => (open ? setOpen(false) : setOpen(true))}
-        aria-label="Menu"
-        className="sm:hidden"
-      >
+      <div className="flex items-center  gap-6 sm:hidden">
+        {" "}
+        <div className="relative cursor-pointer">
+          <img src={data.assets.nav_cart_icon} alt="cart" className="size-4" />
+          <button className="absolute -top-2 -right-3 text-xs text-white bg-primary w-[18px] h-[18px] rounded-full">
+            {getCartCount()}
+          </button>
+        </div>
+        <button
+          onClick={() => (open ? setOpen(false) : setOpen(true))}
+          aria-label="Menu"
+          className="sm:hidden"
+        >
+          <img
+            src={data.assets.menu_icon}
+            onClick={() => setOpen(!open)}
+            alt="menu"
+            className="cursor-pointer"
+          />
+        </button>
         {/* Menu Icon SVG */}
-        <img
-          src={data.assets.menu_icon}
-          onClick={() => setOpen(!open)}
-          alt="menu"
-          className="cursor-pointer"
-        />
-      </button>
-
+      </div>
       {/* Mobile Menu */}
       <div
         className={`${
