@@ -14,3 +14,7 @@
 button {
   cursor: pointer;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

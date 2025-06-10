@@ -11,15 +11,19 @@ import ProductCategory from "./pages/ProductCategory";
 import ProductDetails from "./pages/ProductDetails";
 import CartPage from "./pages/CartPage";
 import AddAddress from "./pages/AddAddress";
-import Orders from "./pages/Orders";
+import Orders from "./pages/admin/Orders";
+import AdminLogin from "./components/Admin/AdminLogin";
+import AdminLayout from "./pages/admin/AdminLayout";
+import AddProduct from "./pages/admin/AddProduct";
+import ProductList from "./pages/admin/ProductList";
 
 const App = () => {
-  const isAdmin = useLocation().pathname.includes("admin");
-  const { userLogin } = useAppContext();
+  const isAdminPath = useLocation().pathname.includes("admin");
+  const { userLogin, isAdmin } = useAppContext();
 
   return (
-    <>
-      {!isAdmin && <Navbar />}
+    <div className="text-default min-h-screen text-gray-700 bg-white">
+      {!isAdminPath && <Navbar />}
       {userLogin && <Login />}
 
       <Toaster />
@@ -32,10 +36,18 @@ const App = () => {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/add-address" element={<AddAddress />} />
           <Route path="/my-orders" element={<Orders />} />
+          <Route
+            path="/admin"
+            element={isAdmin ? <AdminLayout /> : <AdminLogin />}
+          >
+            <Route index element={isAdmin ? <AddProduct /> : null} />
+            <Route path="product-list" element={<ProductList />} />
+            <Route path="orders" element={<Orders />} />
+          </Route>
         </Routes>
-        {!isAdmin && <Footer />}
+        {!isAdminPath && <Footer />}
       </div>
-    </>
+    </div>
   );
 };
 
