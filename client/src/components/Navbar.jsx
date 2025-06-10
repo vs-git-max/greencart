@@ -6,7 +6,7 @@ import { useAppContext } from "../context/AppContext";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
-  let {
+  const {
     user,
     setUser,
     setUserLogin,
@@ -51,7 +51,12 @@ const Navbar = () => {
         </div>
 
         <div className="relative cursor-pointer">
-          <img src={data.assets.nav_cart_icon} alt="cart" className="size-4" />
+          <img
+            onClick={() => navigate("/cart")}
+            src={data.assets.nav_cart_icon}
+            alt="cart"
+            className="size-4"
+          />
           <button className="absolute -top-2 -right-3 text-xs text-white bg-primary w-[18px] h-[18px] rounded-full">
             {getCartCount()}
           </button>
