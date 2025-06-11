@@ -92,13 +92,9 @@ const AddProduct = () => {
             className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40"
           >
             <option value="">Select Category</option>
-            {[
-              { name: "Electronics" },
-              { name: "Clothing" },
-              { name: "Accessories" },
-            ].map((item, index) => (
-              <option key={index} value={item.name}>
-                {item.name}
+            {data.categories.map((item, index) => (
+              <option key={index} value={item.path}>
+                {item.path}
               </option>
             ))}
           </select>
@@ -133,7 +129,7 @@ const AddProduct = () => {
             />
           </div>
         </div>
-        <button className="px-8 py-2.5 bg-indigo-500 text-white font-medium rounded">
+        <button className="px-8 py-2.5 bg-primary text-white font-medium rounded">
           ADD
         </button>
       </form>
