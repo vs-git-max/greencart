@@ -12,8 +12,6 @@ const Orders = () => {
   useEffect(() => {
     fetchOrders();
   }, []);
-  const boxIcon =
-    "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/e-commerce/boxIcon.svg";
 
   return (
     <div className="no-scrollbar flex-1 h-[95vh] overflow-y-scroll">
