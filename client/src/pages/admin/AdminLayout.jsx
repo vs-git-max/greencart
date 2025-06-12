@@ -2,9 +2,10 @@ import React from "react";
 import { useAppContext } from "../../context/AppContext";
 import data from "../../assets/assets";
 import { Link, NavLink, Outlet } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const AdminLayout = () => {
-  const { setIsAdmin } = useAppContext();
+  const { axios, navigate } = useAppContext();
 
   const sidebarLinks = [
     { name: "Add Product", path: "/admin", icon: data.assets.add_icon },
@@ -17,7 +18,18 @@ const AdminLayout = () => {
   ];
 
   const logout = async () => {
-    setIsAdmin(false);
+    try {
+      const { data } = await axios.get("/api/v1/admin/logout");
+
+      if (data.success) {
+        toast.success(data.message);
+        navigate("/");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
   return (
     <>

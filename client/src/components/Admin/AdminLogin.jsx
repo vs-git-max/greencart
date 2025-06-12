@@ -1,14 +1,31 @@
 import { useEffect, useState } from "react";
 import { useAppContext } from "../../context/AppContext";
+import toast from "react-hot-toast";
 
 const AdminLogin = () => {
-  const { isAdmin, setIsAdmin, navigate } = useAppContext();
+  const { isAdmin, setIsAdmin, navigate, axios } = useAppContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleOnSubmit = async (e) => {
-    e.preventDefault();
-    setIsAdmin(true);
+    try {
+      e.preventDefault();
+      const { data } = await axios.post("/api/v1/admin/login", {
+        email,
+        password,
+      });
+
+      if (data.success) {
+        setIsAdmin(true);
+        navigate("/admin");
+      } else {
+        setEmail("");
+        setPassword("");
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   useEffect(() => {
