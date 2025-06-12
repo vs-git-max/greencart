@@ -12,6 +12,7 @@ import connectCloudinary from "./configs/cloudinary/cloudinary.config.js";
 import productRoutes from "./routes/product.routes.js";
 import cartRoutes from "./routes/cart.routes.js";
 import addressRouter from "./routes/address.routes.js";
+import orderRoutes from "./routes/order.routes.js";
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use("/api/v1/admin", adminRoutes);
 app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/cart", cartRoutes);
 app.use("/api/v1/address", addressRouter);
+app.use("/api/v1/order", orderRoutes);
 
 app.listen(PORT, async () => {
   await connectDB();

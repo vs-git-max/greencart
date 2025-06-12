@@ -10,7 +10,7 @@ const productRoutes = Router();
 
 productRoutes.post(
   "/add-product",
-  upload.array([images]),
+  upload.array(["images"]),
   authAdmin,
   addProduct
 );
