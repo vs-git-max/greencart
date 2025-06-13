@@ -9,7 +9,7 @@ const addAddress = async (req, res) => {
       userId,
     });
 
-    res.json({
+    return res.json({
       success: true,
       message: "Address added successfully",
     });
