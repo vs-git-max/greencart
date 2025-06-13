@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAppContext } from "../../context/AppContext";
-import data, { dummyOrders } from "../../assets/assets";
+import data from "../../assets/assets";
 import toast from "react-hot-toast";
 
 const Orders = () => {
