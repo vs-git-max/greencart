@@ -8,7 +8,7 @@ import isAuth from "../controllers/auth/checkAuth.js";
 const authRouter = Router();
 authRouter.post("/register", register);
 authRouter.post("/login", login);
-authRouter.post("/logout", authUser, logout);
+authRouter.get("/logout", logout);
 authRouter.get("/is-auth", authUser, isAuth);
 
 export default authRouter;

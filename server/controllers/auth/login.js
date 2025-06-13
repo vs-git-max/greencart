@@ -15,7 +15,7 @@ const login = async (req, res) => {
     if (!isUser) {
       return res.json({
         success: false,
-        message: "User with the email not found",
+        message: "User with the email not found. Consider create account",
       });
     }
 

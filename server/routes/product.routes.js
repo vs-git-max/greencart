@@ -14,6 +14,7 @@ productRoutes.post(
   authAdmin,
   addProduct
 );
+productRoutes.post("/add-product", addProduct);
 productRoutes.get("/get-products", productList);
 productRoutes.get("/get-product", getProduct);
 productRoutes.put("/change-stock", authAdmin, changeStock);

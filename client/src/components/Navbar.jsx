@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import data from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   const {
+    axios,
     user,
     setUser,
     setUserLogin,
@@ -18,8 +20,19 @@ const Navbar = () => {
   console.log(user);
 
   const logout = async () => {
-    setUser(null);
-    navigate("/");
+    try {
+      const { data } = await axios.get("api/v1/auth/logout");
+      if (data?.success) {
+        toast.success(data?.message);
+        setUser(null);
+        navigate("/");
+        console.log(data);
+      } else {
+        toast.error(data?.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   useEffect(() => {
@@ -65,11 +78,15 @@ const Navbar = () => {
         <button
           className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition text-white rounded-full"
           onClick={() => {
-            setOpen(false);
-            user ? setUserLogin(true) : logout();
+            if (!user) {
+              setOpen(false);
+              setUserLogin(true);
+            } else {
+              logout();
+            }
           }}
         >
-          {user ? "Login" : "Signup"}
+          {!user ? "Login" : "Logout"}
         </button>
       </div>
 
